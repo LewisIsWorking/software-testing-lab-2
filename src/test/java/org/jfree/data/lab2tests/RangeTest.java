@@ -1,15 +1,18 @@
 package org.jfree.data.lab2tests;
 
 import junit.framework.TestCase;
+import org.jfree.data.Range;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RangeTest extends TestCase {
 
+    Range range;
+
     @BeforeEach
     public void setUp() {
-
+        range = new Range(1.0, 5.0);
     }
 
     @AfterEach
@@ -20,10 +23,15 @@ class RangeTest extends TestCase {
     @Test
     void getLowerBound() {
 
+        assertEquals(1.0, range.getLowerBound());
+
     }
 
     @Test
     void getUpperBound() {
+
+        assertEquals(5.0, range.getUpperBound());
+
     }
 
     @Test
