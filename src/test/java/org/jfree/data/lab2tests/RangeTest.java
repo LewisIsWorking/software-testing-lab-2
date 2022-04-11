@@ -30,6 +30,7 @@ class RangeTest extends TestCase {
     @Test
     void getUpperBound() {
 
+        // UpperBound gets the highest number.
         assertEquals(5.0, range.getUpperBound());
 
     }
@@ -51,7 +52,7 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void testIntersects() {
+    public void testIntersects() {
     }
 
     @Test
@@ -79,7 +80,7 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void testShift() {
+    public void testShift() {
     }
 
     @Test
@@ -87,7 +88,7 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void testEquals() {
+    public void testEquals() {
     }
 
     @Test
@@ -95,10 +96,10 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void testHashCode() {
+    public void testHashCode() {
     }
 
     @Test
-    void testToString() {
+    public void testToString() {
     }
 }
