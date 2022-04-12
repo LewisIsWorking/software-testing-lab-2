@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * --------------
@@ -38,7 +38,7 @@
  * 18-Dec-2007 : Additional tests from Sergei Ivanov (DG);
  * 08-Jan-2012 : Added test for combine() method (DG);
  * 23-Feb-2014 : Added isNaNRange() test (DG);
- * 
+ *
  */
 
 package org.jfree.data;
@@ -346,7 +346,7 @@ public class RangeTest {
         assertEquals(1.0, rr.getLowerBound(), EPSILON);
         assertEquals(2.0, rr.getUpperBound(), EPSILON);
     }
-    
+
     @Test
     public void testIsNaNRange() {
         assertTrue(new Range(Double.NaN, Double.NaN).isNaNRange());

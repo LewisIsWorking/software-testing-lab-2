@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 class RangeTest extends TestCase {
 
-    Range range;
+    Range range1_5;
+    Range range_n1_n5;
 
     @BeforeEach
     public void setUp() {
-        range = new Range(1.0, 5.0);
+        range1_5 = new Range(1.0, 5.0);
+        range_n1_n5 = new Range(-5.0, -1.0);
     }
 
     @AfterEach
@@ -21,34 +23,56 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void getLowerBound() {
+    public void testGetLowerBound() {
 
-        assertEquals(1.0, range.getLowerBound());
+        assertNotSame(2.0, range1_5.getLowerBound());
+        assertEquals(1.0, range1_5.getLowerBound());
 
     }
 
     @Test
-    void getUpperBound() {
+    public void testGetUpperBound() {
 
         // UpperBound gets the highest number.
-        assertEquals(5.0, range.getUpperBound());
+        assertNotSame(2.0, range1_5.getUpperBound());
+        assertEquals(5.0, range1_5.getUpperBound());
 
     }
 
     @Test
-    void getLength() {
+    public void testGetLength() {
     }
 
     @Test
-    void getCentralValue() {
+    public void testGetCentralValue() {
+
+        // 6. False.
+        assertNotSame("assertNotSame Passed. ", 6.0, range1_5.getCentralValue());
+
+        // 3. True.
+        assertEquals("assertEquals Passed. ", 3.0, range1_5.getCentralValue());
+
+        // -2. False.
+        assertNotSame("assertNotSame Passed. ", -2.0, range_n1_n5.getCentralValue());
+
+        // -3. True.
+        assertEquals("assertEquals Passed. ", -3.0, range_n1_n5.getCentralValue());
+
     }
 
     @Test
-    void contains() {
-    }
+    public void testContains() {
 
-    @Test
-    void intersects() {
+        assertTrue("Assert #1. ", range1_5.contains(3));
+
+        assertFalse("Assert #2. ", range1_5.contains(6));
+
+        assertFalse("Assert #3. ", range1_5.contains(0));
+
+        assertFalse("Assert #4. ", range1_5.contains(-5));
+
+        assertNotSame("Assert #5. ", true, range1_5.contains(99999));
+
     }
 
     @Test
@@ -56,27 +80,65 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void constrain() {
+    public void testConstrain() {
     }
 
     @Test
-    void combine() {
+    public void testCombine() {
+
+        Range range5_10 = new Range(5, 10);
+        Range range1_5 = new Range(1, 5);
+        Range range1_10 = new Range(1, 10);
+
+        // Ranges: null and 5 -> 10. Expected: 5 -> 10.
+        assertEquals("assertEquals Passed. ", range5_10, Range.combine(null,range5_10));
+
+        // Ranges: Null and Null. Expected:  Null.
+        assertNull("assertEquals Passed. ", Range.combine(null, null));
+
+        //Ranges: 1 -> 5 and 1 -> 10. Expected: 1 -> 10
+        assertEquals("assertEquals Passed. ", range1_10, Range.combine(range1_5,range1_10));
+
     }
 
     @Test
-    void combineIgnoringNaN() {
+    public void testCombineIgnoringNaN() {
     }
 
     @Test
-    void expandToInclude() {
+    public void testExpandToInclude() {
+
+        Range range0_5 = new Range(0, 5);
+        Range range1_5 = new Range(1, 5);
+        Range range0_6 = new Range(0, 6);
+        Range range1_6 = new Range(1, 6);
+        Range range3_3 = new Range(3, 3);
+
+        assertEquals("Pass. range3_3", range3_3, Range.expandToInclude(null, 3));
+
+        assertEquals("Pass. range1_6", range1_6, Range.expandToInclude(range1_5, 6));
+
+        assertNotSame("Pass. range0_6", range0_6, Range.expandToInclude(range0_5, 5));
+
     }
 
     @Test
-    void expand() {
-    }
+    public void testExpand() {
 
-    @Test
-    void shift() {
+        Range range_n5_n5 = new Range(-5, -5);
+        Range range_n19_9 = new Range(-19, 9);
+        Range range0_16 = new Range(0, 16);
+        Range range1_5 = new Range(1, 5);
+        Range range2_4 = new Range(2, 4);
+
+        assertEquals("Assert #1. ", range0_16, Range.expand(range2_4, 1.0,6.0));
+
+        assertEquals("Assert #2. ", range_n5_n5, Range.expand(range1_5,-1, -5 ));
+
+        assertNotSame("Assert #3. ", range1_5, Range.expand(range1_5, 0.0, 0.0));
+
+        assertEquals("Assert #4. ", range_n19_9, Range.expand(range1_5, 5, 1));
+
     }
 
     @Test
@@ -84,7 +146,7 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void scale() {
+    public void testScale() {
     }
 
     @Test
@@ -92,7 +154,7 @@ class RangeTest extends TestCase {
     }
 
     @Test
-    void isNaNRange() {
+    public void testIsNaNRange() {
     }
 
     @Test

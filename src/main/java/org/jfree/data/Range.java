@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ----------
@@ -58,7 +58,7 @@
  *               Ivanov (DG);
  * 08-Jan-2012 : New method combineIgnoringNaN() (DG);
  * 23-Feb-2014 : Added isNaNRange() method (DG);
- * 
+ *
  */
 
 package org.jfree.data;
@@ -188,7 +188,7 @@ public strictfp class Range implements Serializable {
         }
         if (value > this.upper) {
             return this.upper;
-        } 
+        }
         if (value < this.lower) {
             return this.lower;
         }
@@ -224,7 +224,7 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns a new range that spans both {@code range1} and 
+     * Returns a new range that spans both {@code range1} and
      * {@code range2}.  This method has a special handling to ignore
      * Double.NaN values.
      *
@@ -253,15 +253,15 @@ public strictfp class Range implements Serializable {
         }
         return new Range(l, u);
     }
-    
+
     /**
-     * Returns the minimum value.  If either value is NaN, the other value is 
+     * Returns the minimum value.  If either value is NaN, the other value is
      * returned.  If both are NaN, NaN is returned.
-     * 
+     *
      * @param d1  value 1.
      * @param d2  value 2.
-     * 
-     * @return The minimum of the two values. 
+     *
+     * @return The minimum of the two values.
      */
     private static double min(double d1, double d2) {
         if (Double.isNaN(d1)) {
@@ -429,15 +429,15 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns {@code true} if both the lower and upper bounds are 
+     * Returns {@code true} if both the lower and upper bounds are
      * {@code Double.NaN}, and {@code false} otherwise.
-     * 
+     *
      * @return A boolean.
      */
     public boolean isNaNRange() {
         return Double.isNaN(this.lower) && Double.isNaN(this.upper);
     }
-    
+
     /**
      * Returns a hash code.
      *
