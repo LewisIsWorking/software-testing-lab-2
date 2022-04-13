@@ -57,7 +57,7 @@ import org.junit.jupiter.api.Test;
 public class RangeTest {
 
     /**
-     * Confirm that the constructor initializes all the required fields.
+     * Confirm that the constructor initialises all the required fields.
      */
     @Test
     public void testConstructor() {

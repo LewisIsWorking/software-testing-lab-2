@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class RangeTest extends TestCase {
+class Lab2RangeTest extends TestCase {
 
     Range range1_5;
     Range range_n1_n5;
@@ -164,4 +164,5 @@ class RangeTest extends TestCase {
     @Test
     public void testToString() {
     }
+
 }
