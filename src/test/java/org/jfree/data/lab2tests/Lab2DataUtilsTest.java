@@ -51,7 +51,7 @@ class Lab2DataUtilsTest extends TestCase {
     }
 
 
-    //Lab 3
+    //lab 3
 //    @Test
 //    public void testEqual() {
 //

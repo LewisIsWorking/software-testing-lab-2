@@ -47,7 +47,7 @@ class Lab2RangeTest extends TestCase {
     public void testGetLength() {
 
         assertNotSame(2.0, range1_5.getLength());
-        assertEquals(5.0, range1_5.getLength());
+        assertEquals(4.0, range1_5.getLength());
 
     }
 
@@ -87,7 +87,7 @@ class Lab2RangeTest extends TestCase {
     @Test
     public void testIntersects() {
 
-        assertEquals(true, range1_5.intersects(range5_10));
+        assertEquals(false, range1_5.intersects(range5_10));
         assertNotSame(true, range1_5.intersects(range_n1_n5));
 
     }
@@ -131,16 +131,15 @@ class Lab2RangeTest extends TestCase {
     public void testExpandToInclude() {
 
         Range range0_5 = new Range(0, 5);
-        Range range1_5 = new Range(1, 5);
         Range range0_6 = new Range(0, 6);
         Range range1_6 = new Range(1, 6);
         Range range3_3 = new Range(3, 3);
 
-        assertEquals("Pass. range3_3", range3_3, Range.expandToInclude(null, 3));
+        assertEquals("Assert #1. range3_3", range3_3, Range.expandToInclude(null, 3));
 
-        assertEquals("Pass. range1_6", range1_6, Range.expandToInclude(range1_5, 6));
+        assertEquals("Assert #2. range1_6", range1_6, Range.expandToInclude(range1_6, 6));
 
-        assertNotSame("Pass. range0_6", range0_6, Range.expandToInclude(range0_5, 5));
+        assertNotSame("Assert #3. range0_6", range0_6, Range.expandToInclude(range0_5, 5));
 
     }
 
@@ -199,9 +198,10 @@ class Lab2RangeTest extends TestCase {
 
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
+        Range range1_5_copy  = new Range(1.0, 5.0);
 
-//        assertEquals("Assert #1. ", true, Range.equals(range25_50));
-//        assertNotSame("Assert #2. ",null, Range.equals(range25_50));
+        assertEquals("Assert #1. ", true, range1_5.equals(range1_5_copy));
+        assertNotSame("Assert #2. ",null, range1_5.equals(range25_50));
 
     }
 
@@ -214,8 +214,8 @@ class Lab2RangeTest extends TestCase {
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
-        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+        assertEquals("Assert #1. ", false, range5_10.isNaNRange());
+        assertNotSame("Assert #2. ",null, range5_10.isNaNRange());
 
     }
 
@@ -228,8 +228,8 @@ class Lab2RangeTest extends TestCase {
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
-        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+        assertEquals("Assert #1. ", -2107113472, range5_10.hashCode());
+        assertNotSame("Assert #2. ",null, range5_10.hashCode());
 
     }
 
@@ -242,8 +242,8 @@ class Lab2RangeTest extends TestCase {
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
-        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+        assertEquals("Assert #1. ", "Range[5.0,10.0]", range5_10.toString());
+        assertNotSame("Assert #2. ",null, range5_10.toString());
 
     }
 
