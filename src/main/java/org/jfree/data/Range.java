@@ -248,7 +248,7 @@ public strictfp class Range implements Serializable {
         }
         double l = min(range1.getLowerBound(), range2.getLowerBound());
         double u = max(range1.getUpperBound(), range2.getUpperBound());
-        if (Double.isNaN(l) && Double.isNaN(u)) {
+        if (Double.isNaN(l) && Double.isNaN(u)) { 
             return null;
         }
         return new Range(l, u);

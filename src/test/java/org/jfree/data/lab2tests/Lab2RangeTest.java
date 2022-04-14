@@ -1,10 +1,16 @@
 package org.jfree.data.lab2tests;
 
 import junit.framework.TestCase;
+
+import org.junit.jupiter.api.Assertions;
 import org.jfree.data.Range;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.jfree.chart.axis.LogarithmicAxisTest.EPSILON;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Lab2RangeTest extends TestCase {
 
@@ -182,6 +188,36 @@ class Lab2RangeTest extends TestCase {
         assertEquals("Assert #1. ",range10_15, Range.shift(range5_10,doubleData1));
         assertNotSame("Assert #2. ",null, Range.shift(range5_10, doubleData2));
 
+        Range testRange1 = new Range(5.0, 10.0);
+        Range testRange2 = Range.shift(testRange1, 20.0);
+        assertEquals(25.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(30.0, testRange2.getUpperBound(), 0.001);
+
+        testRange1 = new Range(0.0, 50.0);
+        testRange2 = Range.shift(testRange1, 70.0, true);
+        assertEquals(70.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(120.0, testRange2.getUpperBound(), 0.001);
+
+        testRange1 = new Range(-10.0, 35.0);
+        testRange2 = Range.shift(testRange1, 20.0, true);
+        assertEquals(10.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(55.0, testRange2.getUpperBound(), 0.001);
+
+        testRange1 = new Range(-50, 20.0);
+        testRange2 = Range.shift(testRange1, -30.0, true);
+        assertEquals(-80.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(-10.0, testRange2.getUpperBound(), 0.001);
+
+        testRange1 = new Range(-69, 420.0);
+        testRange2 = Range.shift(testRange1, 20.0, false);
+        assertEquals(-49.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(440.0, testRange2.getUpperBound(), 0.001);
+
+        testRange1 = new Range(-100.0, 20.0);
+        testRange2 = Range.shift(testRange1, -30.0, false);
+        assertEquals(-130.0, testRange2.getLowerBound(), 0.001);
+        assertEquals(0.0, testRange2.getUpperBound(), 0.001);
+
     }
 
     @Test
@@ -212,13 +248,35 @@ class Lab2RangeTest extends TestCase {
         assertFalse("Assert #1. ", range1_5.equals(range25_50));
         assertFalse("Assert #2. ", range5_10.equals(range1_5));
 
+        assertEquals(range1_5, range1_5);
+        assertEquals(range25_50, range25_50);
+
+        assertFalse(range1_5.equals(10.0));
+
+        Range testRange1 = new Range(12.0, 35.0);
+        Range testRange2 = new Range(2.0, 36.0);
+        assertFalse(testRange1.equals(testRange2));
+
     }
 
     @Test
     public void testIsNaNRange() {
 
+        Range testRange1 = new Range(1.0, 5.0);
+        Range testRange2 = new Range(5.5, 10.5);
+        Range testRange3 = new Range(Double.NaN, 5.0);
+        Range testRange4 = Range.combineIgnoringNaN(testRange1, testRange3);
+
         assertTrue("Assert True: ", new Range(Double.NaN, Double.NaN).isNaNRange());
         assertFalse("Assert False: " , new Range(1.0, 5.0).isNaNRange());
+
+        assertEquals(1.0, testRange4.getLowerBound(), EPSILON);
+        assertEquals(5.0, testRange4.getUpperBound(), EPSILON);
+
+        Range testRange5 = new Range(1.7, Double.NaN);
+        testRange4 = Range.combineIgnoringNaN(testRange5, testRange1);
+        assertEquals(1.0, testRange4.getLowerBound(), EPSILON);
+        assertEquals(5.0, testRange4.getUpperBound(), EPSILON);
 
     }
 
@@ -244,8 +302,8 @@ class Lab2RangeTest extends TestCase {
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
-        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+        assertEquals("Assert #1. ", "Range[25.0,50.0]", range25_50.toString());
+        assertNotSame("Assert #2. ",null, range25_50.toString());
 
     }
 
@@ -271,10 +329,32 @@ class Lab2RangeTest extends TestCase {
     public void testConstructor()
     {
         Range testRange = new Range(1.0, 5.0);
-
+        
         assertNotNull("Assert Not Null #1: ", testRange);
+        
+        IllegalArgumentException thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            //Code under test
+        	Range testRange2 = new Range(10.0, 5.0);
+            assertNotSame("Assert #3. ", testRange , testRange2);
+        });
+        Assertions.assertEquals("Range(double, double): require lower (10.0) <= upper (5.0).", thrown.getMessage());
     }
 
+    @Test
+    public void testShiftWithNoZeroCrossing()
+    {
+        double testVal = 1.0;
+        double testDelta = 2.0;
 
+        Range testRange = new Range(1.0, 5.0);
+        Range testRange2 = Range.shift(testRange, 20.0, false);
+
+        Range expectedRange = new Range(21.0,25.0);
+
+        assertEquals("assertion #1",expectedRange, testRange2);
+
+    }
+
+    // Shift with no zero crossing: 40%
 
 }
