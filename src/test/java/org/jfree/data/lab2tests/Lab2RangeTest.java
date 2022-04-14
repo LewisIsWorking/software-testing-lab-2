@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 
 class Lab2RangeTest extends TestCase {
 
+    Range range5_10;
     Range range1_5;
     Range range_n1_n5;
 
     @BeforeEach
     public void setUp() {
+        range5_10 = new Range(5, 10);
         range1_5 = new Range(1.0, 5.0);
         range_n1_n5 = new Range(-5.0, -1.0);
     }
@@ -41,6 +43,10 @@ class Lab2RangeTest extends TestCase {
 
     @Test
     public void testGetLength() {
+
+        assertNotSame(2.0, range1_5.getLength());
+        assertEquals(5.0, range1_5.getLength());
+
     }
 
     @Test
@@ -77,10 +83,21 @@ class Lab2RangeTest extends TestCase {
 
     @Test
     public void testIntersects() {
+
+        assertEquals(true, range1_5.intersects(range5_10));
+        assertNotSame(true, range1_5.intersects(range_n1_n5));
+
     }
 
     @Test
     public void testConstrain() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        assertEquals(5.0, range1_5.constrain(doubleData1));
+        assertNotSame(null, range1_5.constrain(doubleData2));
+
     }
 
     @Test
@@ -143,10 +160,30 @@ class Lab2RangeTest extends TestCase {
 
     @Test
     public void testShift() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[10.0,15.0]
+        Range range10_15 = new Range(10.0, 15.0);
+
+        assertEquals("Assert #1. ",range10_15, Range.shift(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.shift(range5_10, doubleData2));
+
     }
 
     @Test
     public void testScale() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[25.0,50.0]
+        Range range25_50 = new Range(25.0, 50.0);
+
+        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData2));
+
     }
 
     @Test

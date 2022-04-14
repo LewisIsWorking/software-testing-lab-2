@@ -1,15 +1,17 @@
 package org.jfree.data.lab2tests;
 
 import junit.framework.TestCase;
-import org.jfree.data.DataUtils;
-import org.jfree.data.DefaultKeyedValues2D;
-import org.jfree.data.Values2D;
+import org.jfree.data.*;
+import org.jfree.data.general.DefaultKeyedValuesDataset;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -48,14 +50,40 @@ class Lab2DataUtilsTest extends TestCase {
 
     }
 
-    @Test
-    public void testEqual() {
 
-    }
+    //lab 3
+//    @Test
+//    public void testEqual() {
+//
+//        double[][] data1 = new double[][]{{1,2,3}};
+//        double[][] data2 = new double[][]{{1,2,3}};
+//        double[][] data3 = new double[][]{{0}};
+//
+//        assertTrue("Assert #1. ", DataUtils.equal(data1, data2));
+//
+//        assertFalse("Assert #2. ", DataUtils.equal(data1, data3));
+//
+//    }
 
-    @Test
-    public void testClone() {
-    }
+    //lab 3
+//    @Test
+//    public void testClone() {
+//
+//        double[][] data1 = new double[][]{{1, 2, 3}};
+//        double[][] data2 = new double[][]{{1, 2, 3}};
+//        double[][] data3 = new double[][]{{0}};
+//
+//        double[][] data1Clone = DataUtils.clone(data1);
+//        boolean actual1 = Arrays.deepEquals(data1, data1Clone);
+//
+//        assertTrue("Assert #1. ", actual1);
+//
+//        // Compares data 3 and data1's clone.
+//        boolean actual2 = Arrays.deepEquals(data3, data1Clone);
+//
+//        assertFalse("Assert #2. ", actual2);
+//
+//    }
 
     // This tests calculateColumnTotal(value2d, int)
     @Test
@@ -151,33 +179,26 @@ class Lab2DataUtilsTest extends TestCase {
         expectedNumber1.add(1.0);
         expectedNumber1.add(2.0);
         expectedNumber1.add(3.0);
-
         Number[] actualNumber1_num = DataUtils.createNumberArray(data1);
         ArrayList<Double> actualNumber1_double = new ArrayList<>();
-
         int loop = 0;
-        for (Number i: actualNumber1_num) {
+        for (Number ignored : actualNumber1_num) {
             actualNumber1_double.add((Double) actualNumber1_num[loop]);
             loop = loop + 1;
         }
-
         // This test sees if the values input are the same as the output as the number class should mean they are the same.
         assertEquals("Assert #1. ", expectedNumber1, actualNumber1_double);
-
         // Assert #2.
         double[] data2 = new double[]{};
         Number[] actualNumber2_num =DataUtils.createNumberArray(data2);
         int actualNumber2_length = actualNumber2_num.length;
         assertEquals("Assert #2. ", 0, actualNumber2_length);
-
         // Assert #3.
         double[] data3 = new double[]{-1,-1};
         assertNotSame("Assert #3. ", null, DataUtils.createNumberArray(data3));
-
         // Assert #4.
         double[] data4 = new double[]{1,2,3};
         Number[] actualNumber4 =  DataUtils.createNumberArray(data4);
-
         // The same values as we think "create Number Array" will make.
         ArrayList<Number> expectedNumber4 = new ArrayList<>();
         expectedNumber4.add(1.0);
@@ -187,7 +208,7 @@ class Lab2DataUtilsTest extends TestCase {
         loop = 0;
         boolean assert4Result = false;
         int correctCount = 0;
-        for (Number i: actualNumber4) {
+        for (Number ignored : actualNumber4) {
 
             System.out.println("actualNumber: " + actualNumber4[loop] + ". expectedNumber: " + expectedNumber4.get(loop));
 
@@ -199,29 +220,100 @@ class Lab2DataUtilsTest extends TestCase {
                 assert4Result = false;
                 break;
             }
-
             loop = loop + 1;
         }
-
         if(correctCount != actualNumber4.length)
         {
             assert4Result = false;
         }
-
         // This compares each value of the collections of Numbers, if all of them are the same
         assertTrue("Assert #4. ", assert4Result);
-
     }
 
-    @Test
-    public void testCreateNumberArray2D() {
 
-    }
+//    //added lab 3
+//    @Test
+//    public void testCreateNumberArray2D() {
+//
+//        // Assert #1.
+//        double[][] data1 = new double[][]{{1, 2, 3}};
+//        Number[][] actualNumber1 =  DataUtils.createNumberArray2D(data1);
+//        // The same values as we think "create Number Array" will make.
+//        ArrayList<ArrayList<Number>> expectedNumber1 = new ArrayList<>();
+//        ArrayList<Number> expectedNumber1SubArrayList = new ArrayList<>();
+//
+//        expectedNumber1SubArrayList.add(1.0);
+//        expectedNumber1SubArrayList.add(2.0);
+//        expectedNumber1SubArrayList.add(3.0);
+//
+//        expectedNumber1.add(expectedNumber1SubArrayList);
+//
+//        int loop = 0;
+//        boolean assert1Result = false;
+//        int correctCount = 0;
+//        int itemCount = 0;
+//
+//        for (Number[] ignored : actualNumber1) {
+//
+//            System.out.println("Actual Array: " + Arrays.toString(actualNumber1[loop]) + ". Expected array: " + expectedNumber1.get(loop));
+//
+//            int loop1 = 0;
+//            for (Number ignore1: actualNumber1[loop]) {
+//
+//                if(actualNumber1[loop][loop1].equals(expectedNumber1.get(loop).get(loop1))){
+//                    assert1Result = true;
+//                    correctCount = correctCount + 1;
+//                    itemCount = itemCount + 1;
+//                    System.out.println("Actual Number: " + actualNumber1[loop][loop1] + ". Expected array: " + expectedNumber1.get(loop).get(loop1));
+//                }
+//                else {
+//                    assert1Result = false;
+//                    break;
+//                }
+//                // Next item in the array.
+//                loop1 = loop1 + 1;
+//            }
+//            // Next array in the collection of arrays.
+//            loop = loop + 1;
+//
+//        }
+//
+//        if(correctCount != itemCount)
+//        {
+//            assert1Result = false;
+//            System.out.println("Checked correct numbers is not equal to Collection lengths.");
+//            System.out.println("Correct Count: " + correctCount);
+//            System.out.println("Actual Number Length: " + actualNumber1.length);
+//        }
+//
+//        // This compares each value of the collections of Numbers, if all of them are the same
+//        assertTrue("Assert #4. ", assert1Result);
+//
+//    }
 
-    @Test
-    public void testGetCumulativePercentages() {
 
-    }
+    //added as part of lab 3
+//    @Test
+//    public void testGetCumulativePercentages() {
+//
+//        //Dataset.
+//        //Dataset2D.
+//        //DefaultKeyedValues.
+//
+//        // Actual 1.
+//        DefaultKeyedValues data1 = new DefaultKeyedValues();
+//        data1.addValue("1", 15.0);
+//        data1.addValue("2", 10.0);
+//
+//        KeyedValues actual1 = DataUtils.getCumulativePercentages(data1);
+//
+//        System.out.println("Actual 1: " + actual1.getValue(0));
+//
+//        assertNotSame("Assert #1. ", null, actual1.getValue(0));
+//
+//        assertEquals("Assert #2. ", 0.6, actual1.getValue(0));
+//
+//    }
 
 
 }
