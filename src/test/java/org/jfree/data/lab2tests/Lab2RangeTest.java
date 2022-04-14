@@ -187,24 +187,64 @@ class Lab2RangeTest extends TestCase {
         Range range25_50 = new Range(25.0, 50.0);
 
         assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
-        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData2));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
 
     }
 
     @Test
     public void testEquals() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[25.0,50.0]
+        Range range25_50 = new Range(25.0, 50.0);
+
+//        assertEquals("Assert #1. ", true, Range.equals(range25_50));
+//        assertNotSame("Assert #2. ",null, Range.equals(range25_50));
+
     }
 
     @Test
     public void testIsNaNRange() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[25.0,50.0]
+        Range range25_50 = new Range(25.0, 50.0);
+
+        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+
     }
 
     @Test
     public void testHashCode() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[25.0,50.0]
+        Range range25_50 = new Range(25.0, 50.0);
+
+        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+
     }
 
     @Test
     public void testToString() {
+
+        double doubleData1 = 5.0;
+        double doubleData2 = -5.0;
+
+        // Range[25.0,50.0]
+        Range range25_50 = new Range(25.0, 50.0);
+
+        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
+
     }
 
 }
