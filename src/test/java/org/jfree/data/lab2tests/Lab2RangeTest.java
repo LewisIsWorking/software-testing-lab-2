@@ -24,6 +24,7 @@ class Lab2RangeTest extends TestCase {
 
     }
 
+    //added in lab 3
     @Test
     public void testGetLowerBound() {
 
@@ -32,6 +33,7 @@ class Lab2RangeTest extends TestCase {
 
     }
 
+    //added in lab 3
     @Test
     public void testGetUpperBound() {
 
@@ -81,6 +83,7 @@ class Lab2RangeTest extends TestCase {
 
     }
 
+    //added in lab 3
     @Test
     public void testIntersects() {
 
@@ -89,6 +92,8 @@ class Lab2RangeTest extends TestCase {
 
     }
 
+
+    //added in lab 3
     @Test
     public void testConstrain() {
 
