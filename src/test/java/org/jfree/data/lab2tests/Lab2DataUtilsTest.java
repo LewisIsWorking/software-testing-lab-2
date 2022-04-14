@@ -188,14 +188,17 @@ class Lab2DataUtilsTest extends TestCase {
         }
         // This test sees if the values input are the same as the output as the number class should mean they are the same.
         assertEquals("Assert #1. ", expectedNumber1, actualNumber1_double);
+
         // Assert #2.
         double[] data2 = new double[]{};
         Number[] actualNumber2_num =DataUtils.createNumberArray(data2);
         int actualNumber2_length = actualNumber2_num.length;
         assertEquals("Assert #2. ", 0, actualNumber2_length);
+
         // Assert #3.
         double[] data3 = new double[]{-1,-1};
         assertNotSame("Assert #3. ", null, DataUtils.createNumberArray(data3));
+
         // Assert #4.
         double[] data4 = new double[]{1,2,3};
         Number[] actualNumber4 =  DataUtils.createNumberArray(data4);
@@ -226,6 +229,7 @@ class Lab2DataUtilsTest extends TestCase {
         {
             assert4Result = false;
         }
+
         // This compares each value of the collections of Numbers, if all of them are the same
         assertTrue("Assert #4. ", assert4Result);
     }
