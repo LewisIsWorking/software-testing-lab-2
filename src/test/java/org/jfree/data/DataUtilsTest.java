@@ -56,6 +56,7 @@ public class DataUtilsTest {
     /**
      * Tests the createNumberArray2D() method.
      */
+    //lab 3
     @Test
     public void testCreateNumberArray2D() {
         double[][] d = new double[2][];
@@ -88,35 +89,36 @@ public class DataUtilsTest {
     /**
      * Some checks for the calculateColumnTotal() method.
      */
-    @Test
-    public void testCalculateColumnTotal2() {
-        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
-        table.addValue(1.0, "R0", "C0");
-        table.addValue(2.0, "R0", "C1");
-        table.addValue(3.0, "R1", "C0");
-        table.addValue(4.0, "R1", "C1");
-        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0,
-                new int[] {0, 1}), EPSILON);
-        assertEquals(1.0, DataUtils.calculateColumnTotal(table, 0,
-                new int[] {0}), EPSILON);
-        assertEquals(3.0, DataUtils.calculateColumnTotal(table, 0,
-                new int[] {1}), EPSILON);
-        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 0,
-                new int[] {}), EPSILON);
-
-        assertEquals(6.0, DataUtils.calculateColumnTotal(table, 1,
-                new int[] {0, 1}), EPSILON);
-        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
-                new int[] {0}), EPSILON);
-        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 1,
-                new int[] {1}), EPSILON);
-
-        table.setValue(null, "R1", "C1");
-        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
-                new int[] {0, 1}), EPSILON);
-        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 1,
-                new int[] {1}), EPSILON);
-    }
+    //lab 3
+//    @Test
+//    public void testCalculateColumnTotal2() {
+//        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+//        table.addValue(1.0, "R0", "C0");
+//        table.addValue(2.0, "R0", "C1");
+//        table.addValue(3.0, "R1", "C0");
+//        table.addValue(4.0, "R1", "C1");
+//        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0,
+//                new int[] {0, 1}), EPSILON);
+//        assertEquals(1.0, DataUtils.calculateColumnTotal(table, 0,
+//                new int[] {0}), EPSILON);
+//        assertEquals(3.0, DataUtils.calculateColumnTotal(table, 0,
+//                new int[] {1}), EPSILON);
+//        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 0,
+//                new int[] {}), EPSILON);
+//
+//        assertEquals(6.0, DataUtils.calculateColumnTotal(table, 1,
+//                new int[] {0, 1}), EPSILON);
+//        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
+//                new int[] {0}), EPSILON);
+//        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 1,
+//                new int[] {1}), EPSILON);
+//
+//        table.setValue(null, "R1", "C1");
+//        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
+//                new int[] {0, 1}), EPSILON);
+//        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 1,
+//                new int[] {1}), EPSILON);
+//    }
 
     /**
      * Some checks for the calculateRowTotal() method.
@@ -171,75 +173,79 @@ public class DataUtilsTest {
     /**
      * Some tests for the equal(double[][], double[][]) method.
      */
-    @Test
-    public void testEqual() {
-        assertTrue(DataUtils.equal(null, null));
-        
-        double[][] a = new double[5][];
-        double[][] b = new double[5][];
-        assertTrue(DataUtils.equal(a, b));
 
-        a = new double[4][];
-        assertFalse(DataUtils.equal(a, b));
-        b = new double[4][];
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0] = new double[6];
-        assertFalse(DataUtils.equal(a, b));
-        b[0] = new double[6];
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][0] = 1.0;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][0] = 1.0;
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][1] = Double.NaN;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][1] = Double.NaN;
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][2] = Double.NEGATIVE_INFINITY;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][2] = Double.NEGATIVE_INFINITY;
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][3] = Double.POSITIVE_INFINITY;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][3] = Double.POSITIVE_INFINITY;
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][4] = Double.POSITIVE_INFINITY;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][4] = Double.NEGATIVE_INFINITY;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][4] = Double.POSITIVE_INFINITY;
-        assertTrue(DataUtils.equal(a, b));
-    }
+    //added in lab 3
+//    @Test
+//    public void testEqual() {
+//        assertTrue(DataUtils.equal(null, null));
+//
+//        double[][] a = new double[5][];
+//        double[][] b = new double[5][];
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a = new double[4][];
+//        assertFalse(DataUtils.equal(a, b));
+//        b = new double[4][];
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0] = new double[6];
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0] = new double[6];
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][0] = 1.0;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][0] = 1.0;
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][1] = Double.NaN;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][1] = Double.NaN;
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][2] = Double.NEGATIVE_INFINITY;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][2] = Double.NEGATIVE_INFINITY;
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][3] = Double.POSITIVE_INFINITY;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][3] = Double.POSITIVE_INFINITY;
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][4] = Double.POSITIVE_INFINITY;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][4] = Double.NEGATIVE_INFINITY;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][4] = Double.POSITIVE_INFINITY;
+//        assertTrue(DataUtils.equal(a, b));
+//    }
 
     /**
      * Some tests for the clone() method.
      */
-    @Test
-    public void testClone() {
-        double[][] a = new double[1][];
-        double[][] b = DataUtils.clone(a);
-        assertTrue(DataUtils.equal(a, b));
-        a[0] = new double[] { 3.0, 4.0 };
-        assertFalse(DataUtils.equal(a, b));
-        b[0] = new double[] { 3.0, 4.0 };
-        assertTrue(DataUtils.equal(a, b));
 
-        a = new double[2][3];
-        a[0][0] = 1.23;
-        a[1][1] = Double.NaN;
-        b = DataUtils.clone(a);
-        assertTrue(DataUtils.equal(a, b));
-
-        a[0][0] = 99.9;
-        assertFalse(DataUtils.equal(a, b));
-        b[0][0] = 99.9;
-        assertTrue(DataUtils.equal(a, b));
-    }
+    //added in lab 3
+//    @Test
+//    public void testClone() {
+//        double[][] a = new double[1][];
+//        double[][] b = DataUtils.clone(a);
+//        assertTrue(DataUtils.equal(a, b));
+//        a[0] = new double[] { 3.0, 4.0 };
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0] = new double[] { 3.0, 4.0 };
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a = new double[2][3];
+//        a[0][0] = 1.23;
+//        a[1][1] = Double.NaN;
+//        b = DataUtils.clone(a);
+//        assertTrue(DataUtils.equal(a, b));
+//
+//        a[0][0] = 99.9;
+//        assertFalse(DataUtils.equal(a, b));
+//        b[0][0] = 99.9;
+//        assertTrue(DataUtils.equal(a, b));
+//    }
 
 }

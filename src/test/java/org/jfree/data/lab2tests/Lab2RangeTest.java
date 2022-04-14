@@ -87,7 +87,7 @@ class Lab2RangeTest extends TestCase {
     @Test
     public void testIntersects() {
 
-        assertEquals(false, range1_5.intersects(range5_10));
+        assertEquals(true, range5_10.intersects(range5_10));
         assertNotSame(true, range1_5.intersects(range_n1_n5));
 
     }
@@ -124,22 +124,30 @@ class Lab2RangeTest extends TestCase {
     }
 
     @Test
-    public void testCombineIgnoringNaN() {
+    public void testCombineIgnoringNaN()
+    {
+        Range range1 = new Range(1.0, 5.0);
+        Range range2 = new Range(5.0, 10.0);
+
+        assertEquals("Assert Equals #1 ", range1, Range.combineIgnoringNaN(range1, null));
+        assertEquals("Assert Equals #2 ", range2, Range.combineIgnoringNaN(null, range2));
+        assertNull(Range.combine(null,null));
     }
 
     @Test
     public void testExpandToInclude() {
 
         Range range0_5 = new Range(0, 5);
+        Range range1_5 = new Range(1, 5);
         Range range0_6 = new Range(0, 6);
         Range range1_6 = new Range(1, 6);
         Range range3_3 = new Range(3, 3);
 
-        assertEquals("Assert #1. range3_3", range3_3, Range.expandToInclude(null, 3));
+        assertEquals("Pass. range3_3", range3_3, Range.expandToInclude(null, 3));
 
-        assertEquals("Assert #2. range1_6", range1_6, Range.expandToInclude(range1_6, 6));
+        assertEquals("Pass. range1_6", range1_6, Range.expandToInclude(range1_5, 6));
 
-        assertNotSame("Assert #3. range0_6", range0_6, Range.expandToInclude(range0_5, 5));
+        assertNotSame("Pass. range0_6", range0_6, Range.expandToInclude(range0_5, 5));
 
     }
 
@@ -183,6 +191,8 @@ class Lab2RangeTest extends TestCase {
         double doubleData2 = -5.0;
 
         // Range[25.0,50.0]
+
+        // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
         assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
@@ -198,24 +208,17 @@ class Lab2RangeTest extends TestCase {
 
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
-        Range range1_5_copy  = new Range(1.0, 5.0);
 
-        assertEquals("Assert #1. ", true, range1_5.equals(range1_5_copy));
-        assertNotSame("Assert #2. ",null, range1_5.equals(range25_50));
+        assertFalse("Assert #1. ", range1_5.equals(range25_50));
+        assertFalse("Assert #2. ", range5_10.equals(range1_5));
 
     }
 
     @Test
     public void testIsNaNRange() {
 
-        double doubleData1 = 5.0;
-        double doubleData2 = -5.0;
-
-        // Range[25.0,50.0]
-        Range range25_50 = new Range(25.0, 50.0);
-
-        assertEquals("Assert #1. ", false, range5_10.isNaNRange());
-        assertNotSame("Assert #2. ",null, range5_10.isNaNRange());
+        assertTrue("Assert True: ", new Range(Double.NaN, Double.NaN).isNaNRange());
+        assertFalse("Assert False: " , new Range(1.0, 5.0).isNaNRange());
 
     }
 
@@ -225,12 +228,11 @@ class Lab2RangeTest extends TestCase {
         double doubleData1 = 5.0;
         double doubleData2 = -5.0;
 
-        // Range[25.0,50.0]
+
         Range range25_50 = new Range(25.0, 50.0);
+        Range range25_50_2 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", -2107113472, range5_10.hashCode());
-        assertNotSame("Assert #2. ",null, range5_10.hashCode());
-
+        assertEquals(range25_50.hashCode(), range25_50_2.hashCode());
     }
 
     @Test
@@ -242,9 +244,37 @@ class Lab2RangeTest extends TestCase {
         // Range[25.0,50.0]
         Range range25_50 = new Range(25.0, 50.0);
 
-        assertEquals("Assert #1. ", "Range[5.0,10.0]", range5_10.toString());
-        assertNotSame("Assert #2. ",null, range5_10.toString());
+        assertEquals("Assert #1. ", range25_50, Range.scale(range5_10,doubleData1));
+        assertNotSame("Assert #2. ",null, Range.scale(range5_10, doubleData1));
 
     }
+
+//    @Test
+//    public void testMax()
+//    {
+//        double minDbl = 1.0;
+//        double maxDbl = 5.0;
+//
+//        assertEquals("Assert #1. ", maxDbl, range1_5.max(minDbl, maxDbl));
+//    }
+
+//    @Test
+//    public void testMin()
+//    {
+//        double minDbl = 1.0;
+//        double maxDbl = 5.0;
+//
+//        assertEquals("Assert #1", minDbl, range1_5.min(minDbl, maxDbl));
+//    }
+
+    @Test
+    public void testConstructor()
+    {
+        Range testRange = new Range(1.0, 5.0);
+
+        assertNotNull("Assert Not Null #1: ", testRange);
+    }
+
+
 
 }
